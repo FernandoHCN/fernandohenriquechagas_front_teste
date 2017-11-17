@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
+import 'rxjs/add/operator/debounceTime';
+
 import { CorridaService } from '../service/corrida.service';
 import { MotoristaService } from '../service/motorista.service';
 import { PassageiroService } from '../service/passageiro.service';

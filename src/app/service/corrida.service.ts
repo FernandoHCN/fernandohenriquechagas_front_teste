@@ -6,7 +6,9 @@ import { MotoristaService } from './motorista.service';
 import { PassageiroService } from './passageiro.service';
 
 // tslint:disable-next-line:import-blacklist
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
+
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 // import {Response} from '@angular/http';
