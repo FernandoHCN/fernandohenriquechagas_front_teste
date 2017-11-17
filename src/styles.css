@@ -1,0 +1,11 @@
+body {
+  padding-top: 5rem;
+  background-color: black;
+}
+.starter-template {
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+.ng-invalid {
+  border: 1px solid red;
+}

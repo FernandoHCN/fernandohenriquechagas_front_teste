@@ -1,0 +1,107 @@
+<div class="starter-template">
+
+    <h1 class="text-center">Cadastro Passageiro</h1>
+    <p class="lead"></p>
+</div>
+
+<div class="container">
+<div class="starter-template">
+<div class="row" >
+
+  <div class="col-md-2"></div>
+
+  <div class="col-md-16">
+
+        <div class="passageiro" *ngIf="listaPassageiro">
+          <table class="table">
+            <thead class="h">
+              <tr class="h">
+                <th class="h">Nome</th>
+                <th class="h">CPF</th>
+                <th class="h">Data Nascimento</th>
+                <th class="h">Sexo</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr class="Passageiro" (dblclick)="editPassageiro(passageiro)" *ngFor="let passageiro of listaPassageiro">
+
+                <ng-container *ngIf="!editPassageiros.includes(passageiro); else editTD">
+                  <td>{{passageiro.nome}}</td>
+                  <td>{{passageiro.CPF}}</td>
+                  <td>{{passageiro.dataNascimento }}</td>
+                  <td>{{passageiro.sexo}}</td>
+                </ng-container>
+
+                <ng-template #editTD>
+                  <td><input required type="text" name="nome" id="nome" (keypress)="submitPassageiro($event, passageiro)" [(ngModel)]="passageiro.nome" placeholder="Nome" class="form-control"></td>
+                  <td><input type="text" name="CPF" id="CPF" (keypress)="submitPassageiro($event, passageiro)" [(ngModel)]="passageiro.CPF" placeholder="CPF"
+                      class="form-control"></td>
+
+                  <td><input type="text" name="data" id="data" (keypress)="submitPassageiro($event, passageiro)" [(ngModel)]="passageiro.dataNascimento" placeholder="Data de Nascimento" class="form-control"></td>
+
+                  <td><input type="text" name="sexo" id="sexo" (keypress)="submitPassageiro($event, passageiro)" [(ngModel)]="passageiro.sexo" placeholder="Sexo" class="form-control"></td>
+                </ng-template>
+
+              <td class="o">
+                <button class="btn btn-success" (click)="donePassageiro(passageiro)">
+                  <i  class="fa fa-check"></i>
+                </button>
+                <button class="btn btn-primary" (click)="editPassageiro(passageiro)">
+                    <i  class="fa fa-pencil"></i>
+                  </button>
+                <button class="btn btn-danger" (click)="deletePassageiro(passageiro)">
+                    <i  class="fa fa-trash"></i>
+                  </button>
+              </td>
+
+              </tr>
+            </tbody>
+          </table>
+    </div>
+
+    <form   #formulario2="ngForm" novalidate>
+      <div class="form-row">
+
+        <div class="col-md-5">
+          <input type="text" name="nome" id="nome" [(ngModel)]="novoPassageiro.nome" placeholder="Nome" class="form-control"
+          ngModel required #inputNome="ngModel">
+          <small *ngIf="inputNome.valid" class="form-text text-sucess"> Nome Preenchido </small>
+          <small *ngIf="!inputNome.valid && inputNome.touched" class="form-text text-danger"> Preencha o Nome </small>
+        </div>
+        <div class="col-md-5">
+          <input name="CPF" id="CPF" [(ngModel)]="novoPassageiro.CPF" placeholder="CPF" class="form-control"
+            id="CPF" ngModel required #inputCPF="ngModel">
+            <small *ngIf="inputCPF.valid" class="form-text text-sucess"> CPF Preenchido </small>
+            <small *ngIf="!inputCPF.valid && inputCPF.touched" class="form-text text-danger"> Preencha o CPF </small>
+        </div>
+        <div class="col-md-5">
+          <input name="data" id="data" [(ngModel)]="novoPassageiro.dataNascimento" placeholder="Data Nascimento" class="form-control"
+            id="data" ngModel required #inputData="ngModel">
+            <small *ngIf="inputData.valid" class="form-text text-sucess"> Data Preenchido </small>
+            <small *ngIf="!inputData.valid && inputData.touched" class="form-text text-danger"> Preencha a Data </small>
+        </div>
+
+        <div class="col-md-5">
+          <input name="sexo" id="sexo" [(ngModel)]="novoPassageiro.sexo" placeholder="Sexo" class="form-control"
+            id="sexo" ngModel required #inputSexo="ngModel">
+            <small *ngIf="inputSexo.valid" class="form-text text-sucess"> Sexo Preenchido </small>
+            <small *ngIf="!inputSexo.valid && inputSexo.touched" class="form-text text-danger"> Preencha o Sexo </small>
+        </div>
+        <div class="col-md-2">
+          <button type="submit" *ngIf="formulario2.valid" class="btn btn-primary" (click)="create()">Adicionar</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+  <div class="col-md-2">
+      <small  class="form-text text-danger"> *Obs:Todos os campos são obrigatórios e devem ser preenchidos para o botão de enviar ficar disponivel </small>
+
+  </div>
+
+</div>
+</div>
+</div>
+<app-rodape></app-rodape>

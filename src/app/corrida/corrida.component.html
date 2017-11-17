@@ -1,0 +1,113 @@
+<div class="starter-template">
+
+        <h1 class="text-center">Cadastro Corrida</h1>
+        <p class="lead"></p>
+    </div>
+
+    <div class="container">
+    <div class="starter-template">
+    <div class="row" >
+
+      <div class="col-md-2"></div>
+
+      <div class="col-md-16">
+
+            <div class="corridas" *ngIf="listaCorrida">
+              <table class="table">
+                <thead class="h">
+                  <tr class="h">
+                    <th class="h">Nome Motorista</th>
+                    <th class="h">Nome Passageiro</th>
+                    <th class="h">Valor Corrida</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <tr class="Corrida" (dblclick)="editCorrida(corrida)" *ngFor="let corrida of listaCorrida">
+
+                    <ng-container *ngIf="!editCorridas.includes(corrida); else editTD">
+                      <td>{{corrida.motorista.nome}}</td>
+                      <td>{{corrida.passageiro.nome}}</td>
+                      <td>{{corrida.valorCorrida | currency }}</td>
+
+                    </ng-container>
+
+                    <ng-template #editTD>
+                      <td><input required type="text" name="motorista" id="motorista" (keypress)="submitCorrida($event, corrida)" [(ngModel)]="corrida.motorista.nome" placeholder="Motorista" class="form-control"></td>
+                      <td><input type="text" name="passageiro" id="passageiro" (keypress)="submitCorrida($event, corrida)" [(ngModel)]="corrida.passageiro.nome" placeholder="Passageiro"
+                          class="form-control"></td>
+                      <td><input required type="text" name="valor" id="valor" (keypress)="submitCorrida($event, corrida)" [(ngModel)]="corrida.valorCorrida" placeholder="Valor Corrida" class="form-control"></td>
+
+                      </ng-template>
+
+                  <td class="o">
+                    <button class="btn btn-success" (click)="doneCorrida(corrida)">
+                      <i  class="fa fa-check"></i>
+                    </button>
+                    <button class="btn btn-primary" (click)="editCorrida(corrida)">
+                        <i  class="fa fa-pencil"></i>
+                      </button>
+                    <button class="btn btn-danger" (click)="deleteCorrida(corrida)">
+                        <i  class="fa fa-trash"></i>
+                      </button>
+                  </td>
+
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+
+        <form  #formulario3="ngForm" novalidate>
+          <div class="form-row">
+
+            <div class="col-md-5">
+                <label for="exampleFormControlInput1">Selecione um Motorista</label>
+              <select  class="form-control" name="motorista" id="motorista" [(ngModel)]="novoCorrida.motorista.nome" ngModel required  >
+                  <option >Selecione</option>
+                <option *ngFor="let motorista of listaMotoristas">{{motorista.nome}}</option>
+
+              </select>
+          </div>
+          <div class="col-md-5">
+              <label for="exampleFormControlInput1">Selecione o Passageiro</label>
+            <select  class="form-control" name="passageiro" id="passageiro" [(ngModel)]="novoCorrida.passageiro.nome"  ngModel required >
+                <option >Selecione</option>
+              <option *ngFor="let passageiro of listaPassageiros">{{passageiro.nome}}</option>
+
+            </select>
+        </div>
+
+          <!--
+            <div class="col-md-5">
+              <input type="text" name="nome" id="nome" [(ngModel)]="novoCorrida.motorista.nome" placeholder="Motorista" class="form-control">
+            </div>
+
+            <div class="col-md-5">
+              <input name="passageiro" id="passageiro" [(ngModel)]="novoCorrida.passageiro.nome" placeholder="Passageiro" class="form-control"
+                id="CPF">
+            </div>-->
+
+            <div class="col-md-5">
+              <input name="valorCorrida" id="valorCorrida" [(ngModel)]="novoCorrida.valorCorrida" placeholder="Valor Corrida" class="form-control"
+                id="data" ngModel required #inputValor="ngModel">
+                <small *ngIf="inputValor.valid" class="form-text text-sucess"> Valor Preenchido </small>
+                <small *ngIf="!inputValor.valid && inputValor.touched" class="form-text text-danger"> Preencha o valor </small>
+            </div>
+            <div class="col-md-2">
+              <button type="submit" *ngIf="formulario3.valid" class="btn btn-primary" (click)="create()">Adicionar</button>
+            </div>
+          </div>
+        </form>
+
+      </div>
+
+      <div class="col-md-2">
+          <small  class="form-text text-danger"> *Obs:Todos os campos são obrigatórios e devem ser preenchidos para o botão de enviar ficar disponivel </small>
+
+      </div>
+
+    </div>
+    </div>
+    </div>
+
